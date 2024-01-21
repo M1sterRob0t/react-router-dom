@@ -1,0 +1,12 @@
+.catalog {
+  height: 100%;
+}
+
+.catalog ul {
+  padding: 0;
+  margin: 0;
+}
+
+.catalog li {
+  list-style: none;
+}
