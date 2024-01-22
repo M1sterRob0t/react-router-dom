@@ -3,9 +3,9 @@ export enum AppRoute {
     About = '/about',
     AboutUs = '/about-us',
     Contacts = '/contacts',
-    Catalog = '/catalog',
+    Posts = '/posts',
+    Users = '/users',
     Post = '/posts/:id',
-    Posts = '/posts/',
     Login = '/login',
     Profile = '/profile',
     CreatePost = '/create-post',
@@ -15,5 +15,6 @@ export enum AppRoute {
 export const BASE_URL = 'https://jsonplaceholder.org/';
 
 export enum Endpoints {
-  Posts = '/posts/'
+  Posts = 'posts/',
+  Users = 'users/'
 }

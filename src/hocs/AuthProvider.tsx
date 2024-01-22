@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
-import { TUser, TValue } from '../types';
+import { TAuthInfo, TValue } from '../types';
 
 
-let defaultUser: TUser = {
+let defaulTAuthInfo: TAuthInfo = {
   name: null,
   email: null,
   password: null,
@@ -15,14 +15,14 @@ interface IwithAuthContext {
 }
 
 function AuthProvider({children}: IwithAuthContext) {
-  const [user, setUser] = useState<TUser>(defaultUser);
+  const [user, seTAuthInfo] = useState<TAuthInfo>(defaulTAuthInfo);
 
   function signIn(name: string, email: string, password: string) {
-    setUser({name, email, password});
+    seTAuthInfo({name, email, password});
   }
 
   function signOut() {
-    setUser({email: null, password: null, name: null});
+    seTAuthInfo({email: null, password: null, name: null});
   }
 
   const value: TValue = {user, signIn, signOut};

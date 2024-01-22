@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+
 
 import { AppRoute, BASE_URL, Endpoints } from '../../constants';
 
@@ -10,10 +11,9 @@ import type { TPost } from '../../types';
 function Post() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   const [post, setPost] = useState<TPost | null>(null);
   const [isLoading, setLoadingStatus] = useState<boolean>(true);
-  console.log(location);
+
   useEffect(() => {
     if (id) {
       fetch(BASE_URL + Endpoints.Posts + id)

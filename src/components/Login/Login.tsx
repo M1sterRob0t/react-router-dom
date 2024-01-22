@@ -7,7 +7,7 @@ function Login() {
   const {user, signIn} = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+
   const fromPage = location.state || AppRoute.Root;
 
   if (user.name) {

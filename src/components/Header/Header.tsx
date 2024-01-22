@@ -35,11 +35,14 @@ function Header() {
         <NavLink to={AppRoute.Contacts} className={getClassName}>
           Contacts
         </NavLink>
-        <NavLink to={AppRoute.Catalog} className={getClassName}>
-          Catalog
+        <NavLink to={AppRoute.Posts} className={getClassName}>
+          Posts
         </NavLink>
         <NavLink to={AppRoute.CreatePost} className={getClassName}>
           CreatePost
+        </NavLink>
+        <NavLink to={AppRoute.Users} className={getClassName}>
+          Users
         </NavLink>
       </nav>
       {user.name ? (
