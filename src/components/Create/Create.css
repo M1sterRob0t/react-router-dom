@@ -1,0 +1,25 @@
+.create {
+  flex-grow: 1;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.create ul{
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.create li{
+  list-style: none;
+}
+
+.create a{
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+  box-shadow: 0 0 10px 5px red;
+}

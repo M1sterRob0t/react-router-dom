@@ -47,7 +47,7 @@ function Posts() {
       <ul>
         {posts.filter((post) => post.title.includes(searchText)).map((post, i, arr) => (
           <li key={post.id}>
-            <Link to={AppRoute.Posts + '/' + post.id}>{arr.length === 1 ? post.title : i + 1 + '. ' + post.title}</Link>
+            <Link to={`${post.id}`}>{arr.length === 1 ? post.title : i + 1 + '. ' + post.title}</Link>
           </li>
         ))}
       </ul>

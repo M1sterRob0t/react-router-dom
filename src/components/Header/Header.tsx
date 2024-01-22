@@ -38,8 +38,8 @@ function Header() {
         <NavLink to={AppRoute.Posts} className={getClassName}>
           Posts
         </NavLink>
-        <NavLink to={AppRoute.CreatePost} className={getClassName}>
-          CreatePost
+        <NavLink to={AppRoute.Create} className={getClassName}>
+          Create
         </NavLink>
         <NavLink to={AppRoute.Users} className={getClassName}>
           Users

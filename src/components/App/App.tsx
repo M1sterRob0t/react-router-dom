@@ -12,25 +12,31 @@ import Login from '../Login/Login';
 import AuthProvider from '../../hocs/AuthProvider';
 import Profile from '../Profile/Profile';
 import RequireAuth from '../../hocs/RequireAuth';
-import CreatePost from '../CreatePost/CreatePost';
 import Users from '../Users/Users';
+import CreateUser from '../CreateUser/CreateUser';
+import CreatePost from '../CreatePost/CreatePost';
+import Create from '../Create/Create';
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Root} element={<Layout />}>
+          <Route path={'/'} element={<Layout />}>
             <Route index element={<Main />} />
             <Route path={AppRoute.About} element={<About />} />
             <Route path={AppRoute.AboutUs} element={<Navigate to={AppRoute.About} replace />} />
+
             <Route path={AppRoute.Posts} element={<Posts />} />
+            <Route path={AppRoute.Post} element={<Post />} />
             <Route path={AppRoute.Users} element={<Users />} />
             <Route path={AppRoute.Contacts} element={<Contacts />} />
-            <Route path={AppRoute.Post} element={<Post />} />
             <Route path={AppRoute.Profile} element={<RequireAuth><Profile /></RequireAuth>} />
             <Route path={AppRoute.Login} element={<Login />} />
-            <Route path={AppRoute.CreatePost} element={<RequireAuth><CreatePost/></RequireAuth>} />
+            <Route path={AppRoute.Create} element={<RequireAuth><Create/></RequireAuth>}>
+              <Route path={AppRoute.CreatePost}  element={<CreatePost />}/>
+              <Route path={AppRoute.CreateUser}  element={<CreateUser />}/>
+            </Route>
             <Route path={AppRoute.NotFound} element={<NotFound />} />
           </Route>
         </Routes>

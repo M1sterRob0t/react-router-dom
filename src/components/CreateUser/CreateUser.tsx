@@ -1,11 +1,11 @@
 import React from 'react';
 
-function CreatePost() {
+function CreateUser() {
   return (
     <div style={{marginTop: '100px'}}>
-      <h2>Create post section</h2>
+      <h2>Create user section</h2>
     </div>
   );
 }
 
-export default CreatePost;
+export default CreateUser;

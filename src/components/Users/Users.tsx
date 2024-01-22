@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './Users.css';
-import { TPost, TUser } from '../../types';
-import { AppRoute, BASE_URL, Endpoints } from '../../constants';
-import { Link, useSearchParams } from 'react-router-dom';
+import { TUser } from '../../types';
+import { BASE_URL, Endpoints } from '../../constants';
+import { useSearchParams } from 'react-router-dom';
 
 const SEARCH_PARAM = 'id';
 

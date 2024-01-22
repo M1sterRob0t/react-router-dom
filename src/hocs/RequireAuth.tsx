@@ -11,7 +11,7 @@ function RequireAuth({children}: IRequireAuth) {
   const {user} = useAuth();
 
   if (!user.name) {
-    return <Navigate to={AppRoute.Login} state={location.pathname}/>
+    return <Navigate to={'/' + AppRoute.Login} state={location.pathname}/>
   }
 
   return children;
