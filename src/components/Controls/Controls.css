@@ -1,0 +1,27 @@
+.controls {
+  width: 100px;
+  position: absolute;
+  top: 120px;
+  left: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.controls button {
+  background-color: black;
+  color: chartreuse;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.controls button:hover {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.7);
+}
+
+.controls button:active {
+  opacity: 0.9;
+}

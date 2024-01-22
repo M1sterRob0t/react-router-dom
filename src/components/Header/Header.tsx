@@ -1,8 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import logo from './logo.svg';
 import './Header.css';
+import { useAuth } from '../../hooks/useAuth';
 
 const LINK_CLASS_NAME = 'header__link';
 const LINK_ACTIVE_CLASS_NAME = 'header__link--active';
@@ -18,6 +19,9 @@ function getClassName({ isActive, isPending }: IgetClassName): string {
 }
 
 function Header() {
+  const { user, signOut } = useAuth();
+  const location = useLocation();
+
   return (
     <header className="header">
       <img src={logo} className="header__logo" alt="logo" />
@@ -34,7 +38,26 @@ function Header() {
         <NavLink to={AppRoute.Catalog} className={getClassName}>
           Catalog
         </NavLink>
+        <NavLink to={AppRoute.CreatePost} className={getClassName}>
+          CreatePost
+        </NavLink>
       </nav>
+      {user.name ? (
+        <nav className="header__user-nav">
+          <NavLink to={AppRoute.Profile} className={getClassName}>
+            Profile
+          </NavLink>
+          <a href='#' className={LINK_CLASS_NAME} onClick={() => signOut()}>
+            Log out
+          </a>
+        </nav>
+      ) : (
+        <nav className="header__user-nav">
+          <NavLink to={AppRoute.Login} className={getClassName} state={location.pathname}>
+            Log in
+          </NavLink>
+        </nav>
+      )}
     </header>
   );
 }

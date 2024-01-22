@@ -1,4 +1,5 @@
 .header {
+  position: relative;
   height: 100px;
   width: 100%;
   display: flex;
@@ -45,6 +46,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.header__user-nav {
+  position: absolute;
+  right: 100px;
 }
 
 
