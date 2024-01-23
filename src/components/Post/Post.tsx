@@ -8,7 +8,7 @@ import {
   useLoaderData,
 } from 'react-router-dom';
 
-import { BASE_URL, Endpoints } from '../../constants';
+//import { BASE_URL, Endpoints } from '../../constants';
 
 import './Post.css';
 import type { TPost } from '../../types';
