@@ -9,10 +9,10 @@ import {
 } from 'react-router-dom';
 
 import { BASE_URL, Endpoints } from '../../constants';
-
 import './Post.css';
 import type { TPost } from '../../types';
 import { Suspense } from 'react';
+
 
 function Post() {
   const post = useAsyncValue() as TPost;
@@ -39,15 +39,14 @@ function SinglePost() {
 }
 
 export async function fetchPost(params: Params<string>): Promise<TPost | {error: string}> {
-  // const id = params.id;
-  // const response = await fetch(BASE_URL + Endpoints.Posts + id);
-  const response = await fetch('https://8.react.pages.academy/six-cities/favorite'); // 401 Aunauthorized
+  const id = params.id;
+  const response = await fetch(BASE_URL + Endpoints.Posts + id);
 
   const data = await response.json();
   return data;
 }
 
-export async function postLoader({params,}: LoaderFunctionArgs<any>): Promise<ReturnType<typeof defer>> {
+export async function postLoader({params}: LoaderFunctionArgs<any>): Promise<ReturnType<typeof defer>> {
   const response = await fetchPost(params);
 
   if ('error' in response) {
@@ -56,7 +55,7 @@ export async function postLoader({params,}: LoaderFunctionArgs<any>): Promise<Re
     throw json(data, error);
   }
 
-  return defer({ response });
+  return defer({ post: response });
 }
 
 export default SinglePost;

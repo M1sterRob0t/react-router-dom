@@ -10,7 +10,7 @@ function RequireAuth({children}: IRequireAuth) {
   const location = useLocation();
   const {user} = useAuth();
 
-  if (!user.name) {
+  if (user.name) {
     return <Navigate to={'/' + AppRoute.Login} state={location.pathname}/>
   }
 

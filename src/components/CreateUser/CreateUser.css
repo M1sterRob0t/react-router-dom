@@ -1,0 +1,43 @@
+.create-user form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 15px;
+
+  width: 300px;
+  margin: 0 auto;
+}
+
+.create-user label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.create-user textarea, .create-user input{
+  width: 100%;
+  border: 2px solid black;
+  box-shadow: 0 0 1px 1px black;
+}
+
+.create-user label {
+  width: 100%;
+}
+
+.create-user textarea {
+  height: 100px;
+}
+
+.create button{
+  cursor: pointer;
+  border: none;
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+  /* box-shadow: 0 0 10px 5px red; */
+
+  margin: 0 auto;
+}

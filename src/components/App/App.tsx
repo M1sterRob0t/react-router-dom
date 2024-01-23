@@ -12,8 +12,8 @@ import AuthProvider from '../../hocs/AuthProvider';
 import Profile from '../Profile/Profile';
 import RequireAuth from '../../hocs/RequireAuth';
 import Users from '../Users/Users';
-import CreateUser from '../CreateUser/CreateUser';
-import CreatePost from '../CreatePost/CreatePost';
+import CreateUser, { createUserAction } from '../CreateUser/CreateUser';
+import CreatePost, { createPostAction } from '../CreatePost/CreatePost';
 import Create from '../Create/Create';
 import {
   createBrowserRouter,
@@ -23,10 +23,11 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import GlobalErrorBoundary from '../GlobalErrorBoundary/GlobalErrorBoundary';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path={'/'} element={<Layout />} errorElement={<h1 style={{textAlign: 'center', margin: '100px auto'}}>Something went terribly wrong...</h1>}>
+    <Route path={'/'} element={<Layout />} errorElement={<GlobalErrorBoundary />}>
       <Route index element={<Main />} />
       <Route path={AppRoute.About} element={<About />} />
       <Route path={AppRoute.AboutUs} element={<Navigate to={AppRoute.About} replace />} />
@@ -52,8 +53,8 @@ const router = createBrowserRouter(
           </RequireAuth>
         }
       >
-        <Route path={AppRoute.CreatePost} element={<CreatePost />} />
-        <Route path={AppRoute.CreateUser} element={<CreateUser />} />
+        <Route path={AppRoute.CreatePost} element={<CreatePost />} action={createPostAction} errorElement={<ErrorBoundary />}/>
+        <Route path={AppRoute.CreateUser} element={<CreateUser />} action={createUserAction} errorElement={<ErrorBoundary />}/>
       </Route>
       <Route path={AppRoute.NotFound} element={<NotFound />} />
     </Route>
