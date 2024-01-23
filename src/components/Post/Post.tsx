@@ -1,38 +1,21 @@
-import { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import {
+  Await,
+  LoaderFunctionArgs,
+  Params,
+  defer,
+  json,
+  useAsyncValue,
+  useLoaderData,
+} from 'react-router-dom';
 
-
-import { AppRoute, BASE_URL, Endpoints } from '../../constants';
+import { BASE_URL, Endpoints } from '../../constants';
 
 import './Post.css';
 import type { TPost } from '../../types';
-
+import { Suspense } from 'react';
 
 function Post() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [post, setPost] = useState<TPost | null>(null);
-  const [isLoading, setLoadingStatus] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (id) {
-      fetch(BASE_URL + Endpoints.Posts + id)
-        .then((result) => result.json())
-        .then((post) => setPost(post))
-        .catch((err) => console.error(err))
-        .finally(() =>setLoadingStatus(false));
-    } else {
-      navigate(AppRoute.NotFound);
-    }
-  }, [navigate, id]);
-
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (!post) {
-    return <Navigate to={AppRoute.NotFound} />;
-  }
+  const post = useAsyncValue() as TPost;
 
   return (
     <div className="post">
@@ -43,4 +26,37 @@ function Post() {
   );
 }
 
-export default Post;
+function SinglePost() {
+  const { post } = useLoaderData() as { post: TPost };
+
+  return (
+    <Suspense fallback={<h2>Loading...</h2>}>
+      <Await resolve={post}>
+        <Post />
+      </Await>
+    </Suspense>
+  );
+}
+
+export async function fetchPost(params: Params<string>): Promise<TPost | {error: string}> {
+  // const id = params.id;
+  // const response = await fetch(BASE_URL + Endpoints.Posts + id);
+  const response = await fetch('https://8.react.pages.academy/six-cities/favorite'); // 401 Aunauthorized
+
+  const data = await response.json();
+  return data;
+}
+
+export async function postLoader({params,}: LoaderFunctionArgs<any>): Promise<ReturnType<typeof defer>> {
+  const response = await fetchPost(params);
+
+  if ('error' in response) {
+    const data = {sorry: 'You have been fired.', hrEmail: 'hr@bigco.com'};
+    const error = {status: 401, statusText: response.error};
+    throw json(data, error);
+  }
+
+  return defer({ response });
+}
+
+export default SinglePost;
