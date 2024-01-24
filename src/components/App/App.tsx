@@ -24,6 +24,7 @@ import {
 } from 'react-router-dom';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import GlobalErrorBoundary from '../GlobalErrorBoundary/GlobalErrorBoundary';
+import EditPost, { updateFormAction } from '../EditPost/EditPost';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,8 +33,9 @@ const router = createBrowserRouter(
       <Route path={AppRoute.About} element={<About />} />
       <Route path={AppRoute.AboutUs} element={<Navigate to={AppRoute.About} replace />} />
 
-      <Route path={AppRoute.Posts} element={<Posts />} loader={postsLoader} errorElement={<ErrorBoundary />}/>
+      <Route path={AppRoute.Posts} element={<Posts />} loader={postsLoader} errorElement={<ErrorBoundary />} />
       <Route path={AppRoute.Post} element={<Post />} loader={postLoader} errorElement={<ErrorBoundary />}/>
+      <Route path={AppRoute.EditPost} element={<EditPost />} loader={postLoader} errorElement={<ErrorBoundary />} action={updateFormAction}/>
       <Route path={AppRoute.Users} element={<Users />} />
       <Route path={AppRoute.Contacts} element={<Contacts />} />
       <Route

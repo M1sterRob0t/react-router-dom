@@ -2,3 +2,15 @@
   flex-grow: 1;
   padding: 0 100px;
 }
+
+.post button{
+  cursor: pointer;
+  border: none;
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+  box-shadow: 0 0 10px 5px red;
+  width: 50px;
+  margin: 0 auto;
+}

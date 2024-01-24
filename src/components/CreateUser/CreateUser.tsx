@@ -14,7 +14,7 @@ function CreateUser() {
   return (
     <section className="create-user" style={{ marginTop: '50px' }}>
       <h2>Create post section</h2>
-      <Form method="post" action={AppRoute.CreateUser}>
+      <Form method="post" action=''>{/* куда отправить экшен (на этот же компонент)*/}
         <input type="hidden" name="id" value="42" />
         <label>
           Name:

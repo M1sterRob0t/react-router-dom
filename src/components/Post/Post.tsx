@@ -1,5 +1,6 @@
 import {
   Await,
+  Link,
   LoaderFunctionArgs,
   Params,
   defer,
@@ -7,7 +8,6 @@ import {
   useAsyncValue,
   useLoaderData,
 } from 'react-router-dom';
-
 import { BASE_URL, Endpoints } from '../../constants';
 import './Post.css';
 import type { TPost } from '../../types';
@@ -22,12 +22,13 @@ function Post() {
       <h1>{post.id + '. ' + post.title}</h1>
       <h4>{post.publishedAt}</h4>
       <p>{post.content}</p>
+      <Link to={'edit'} state={post}><button>Edit</button></Link>
     </div>
   );
 }
 
 function SinglePost() {
-  const { post } = useLoaderData() as { post: TPost };
+  const {post} = useLoaderData() as {post: TPost};
 
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
@@ -38,24 +39,28 @@ function SinglePost() {
   );
 }
 
-export async function fetchPost(params: Params<string>): Promise<TPost | {error: string}> {
+export async function fetchPost(params: Params<string>): Promise<TPost> {
   const id = params.id;
-  const response = await fetch(BASE_URL + Endpoints.Posts + id);
+  const response: Response = await fetch(BASE_URL + Endpoints.Posts + id);
+
+  if (response.status === 404) {
+    throw new Response('', { status: response.status, statusText: 'Post not found' });
+  }
 
   const data = await response.json();
+
+  if ('error' in data) {
+    const info = {sorry: 'You have been fired.', hrEmail: 'hr@bigco.com'};
+    const error = {status: 401, statusText: data.error};
+    throw json(info, error);
+  }
+
   return data;
 }
 
 export async function postLoader({params}: LoaderFunctionArgs<any>): Promise<ReturnType<typeof defer>> {
-  const response = await fetchPost(params);
 
-  if ('error' in response) {
-    const data = {sorry: 'You have been fired.', hrEmail: 'hr@bigco.com'};
-    const error = {status: 401, statusText: response.error};
-    throw json(data, error);
-  }
-
-  return defer({ post: response });
+  return defer({post: fetchPost(params)}); // обязательно передавать промис!!!!
 }
 
 export default SinglePost;

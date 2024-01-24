@@ -13,7 +13,7 @@ function CreatePost() {
   return (
     <section className="create-post" style={{ marginTop: '50px' }}>
       <h2>Create post section</h2>
-      <Form method="post">
+      <Form method="post" action=''>{/* куда отправить экшен (на этот же компонент)*/}
         <input type="hidden" name="userId" value="2" />
         <label>
           Title:
